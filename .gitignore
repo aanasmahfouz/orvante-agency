@@ -1,0 +1,13 @@
+# System & Editor
+.DS_Store
+Thumbs.db
+.playwright-mcp/
+
+# Temporary test captures (keep preview.png for showcase)
+desktop-*.png
+hero-*.png
+hero_*.png
+mobile-*.png
+orvante-mobile-*.png
+statement-*.png
+trust-*.png

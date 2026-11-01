@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orvante — Strategic Brand & Digital Design Agency</title>
+  <meta name="description" content="Orvante is an elite branding agency engineering market-leading identities, strategic design systems, and high-impact digital experiences for visionary businesses worldwide.">
+  
+  <!-- Inline SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><polygon points='14,3 26,24 2,24' stroke='%23ffffff' stroke-width='1.8' fill='none' opacity='0.4'/><polygon points='14,10 22,24 6,24' fill='%23ffffff'/></svg>">
+
+  <!-- Google Fonts: Inter Tight & Archivo (with variable width) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS RESET & BASE CONFIGURATION
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :root {
+      /* Scale unit: 1440-px desktop base, clamped at 1.333333px (1920px equivalent) */
+      --u: min(calc(100vw / 1440), 1.333333px);
+      
+      /* Color Palette */
+      --hero-paper: #dadada;
+      --hero-ink: #111111;
+      --night-black: #000000;
+      --off-white: #f4f4f4;
+      --statement-grey: #6f6f6f;
+      --hairline-14: rgba(255, 255, 255, 0.14);
+      --hairline-20: rgba(255, 255, 255, 0.20);
+      --hairline-28: rgba(255, 255, 255, 0.28);
+      --dark-card: #262626;
+      --avatar-card-bg: #d6d6d6;
+      --stats-frame-bg: #cdcdcd;
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --u: calc(100vw / 390);
+      }
+    }
+
+    html {
+      background-color: var(--night-black);
+      color: var(--off-white);
+      font-family: 'Inter Tight', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--night-black);
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .archivo {
+      font-family: 'Archivo', sans-serif;
+    }
+
+    /* ==========================================================================
+       SECTION 1: HERO (1440 × 938u)
+       ========================================================================== */
+    .hero-section {
+      width: 100%;
+      background-color: var(--hero-paper);
+      color: var(--hero-ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-artboard {
+      width: calc(1440 * var(--u));
+      height: calc(938 * var(--u));
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Hero Background Photo: placed at left 338u, top -86u, 764 × 1024u */
+    .hero-photo-wrapper {
+      position: absolute;
+      left: calc(338 * var(--u));
+      top: calc(-86 * var(--u));
+      width: calc(764 * var(--u));
+      height: calc(1024 * var(--u));
+      z-index: 1;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      will-change: transform, filter, opacity;
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Nav Segmented Pill at (57, 61) */
+    .hero-nav {
+      position: absolute;
+      left: calc(57 * var(--u));
+      top: calc(61 * var(--u));
+      height: calc(48 * var(--u));
+      background: #ffffff;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      padding: calc(4 * var(--u));
+      z-index: 20;
+      box-shadow: 0 calc(2 * var(--u)) calc(12 * var(--u)) rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-slider {
+      position: absolute;
+      top: calc(4 * var(--u));
+      bottom: calc(4 * var(--u));
+      background: var(--hero-ink);
+      border-radius: 9999px;
+      transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1), width 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .nav-link {
+      position: relative;
+      z-index: 2;
+      padding: 0 calc(20 * var(--u));
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      color: var(--hero-ink);
+      transition: color 0.24s ease;
+      user-select: none;
+    }
+
+    .nav-link.is-active,
+    .nav-link.is-hovered {
+      color: #ffffff;
+    }
+
+    /* Top Right: Date at (1038, 70), Contact Button at (1237, 63) */
+    .hero-date {
+      position: absolute;
+      left: calc(1038 * var(--u));
+      top: calc(70 * var(--u));
+      font-size: calc(13 * var(--u));
+      font-weight: 500;
+      color: var(--hero-ink);
+      letter-spacing: -0.01em;
+      z-index: 20;
+      white-space: nowrap;
+    }
+
+    .btn-contact {
+      position: absolute;
+      left: calc(1237 * var(--u));
+      top: calc(63 * var(--u));
+      width: calc(144 * var(--u));
+      height: calc(46 * var(--u));
+      background: var(--hero-ink);
+      color: #ffffff;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(6 * var(--u));
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      z-index: 20;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
+    }
+
+    .btn-contact:hover {
+      transform: translateY(-1px);
+      background-color: #000000;
+    }
+
+    /* Title: "PURE / DESIGN" at (57, 246), with "(’25)" at (339, 272) */
+    .hero-title-group {
+      position: absolute;
+      left: calc(57 * var(--u));
+      top: calc(246 * var(--u));
+      z-index: 10;
+    }
+
+    .title-line-mask {
+      overflow: hidden;
+      display: block;
+      line-height: 0.86;
+    }
+
+    .title-line {
+      display: block;
+      font-family: 'Archivo', sans-serif;
+      font-variation-settings: 'wdth' 104, 'wght' 640;
+      font-size: calc(90 * var(--u));
+      line-height: 0.86;
+      letter-spacing: -0.06em;
+      color: var(--hero-ink);
+      text-transform: uppercase;
+      will-change: transform;
+    }
+
+    .hero-year-tag {
+      position: absolute;
+      left: calc(339 * var(--u));
+      top: calc(272 * var(--u));
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      color: var(--hero-ink);
+      z-index: 10;
+    }
+
+    /* About copy at y 458 */
+    .hero-about {
+      position: absolute;
+      left: calc(57 * var(--u));
+      top: calc(458 * var(--u));
+      z-index: 10;
+      max-width: calc(280 * var(--u));
+    }
+
+    .about-label {
+      display: inline-flex;
+      align-items: center;
+      gap: calc(6 * var(--u));
+      font-size: calc(13 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--hero-ink);
+      margin-bottom: calc(12 * var(--u));
+      text-transform: uppercase;
+    }
+
+    .about-label::before {
+      content: '●';
+      font-size: calc(8 * var(--u));
+    }
+
+    .about-copy {
+      font-size: calc(14 * var(--u));
+      line-height: 1.42;
+      font-weight: 500;
+      color: #2b2b2b;
+    }
+
+    /* Book A Call button at y 584 */
+    .btn-book-call {
+      position: absolute;
+      left: calc(57 * var(--u));
+      top: calc(584 * var(--u));
+      height: calc(44 * var(--u));
+      padding: 0 calc(22 * var(--u));
+      background: var(--hero-ink);
+      color: #ffffff;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: calc(8 * var(--u));
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      z-index: 10;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
+    }
+
+    .btn-book-call:hover {
+      transform: translateY(-1px);
+      background-color: #000000;
+    }
+
+    /* Stats Frame at (57, 693), 341 × 208u, light grey #cdcdcd */
+    .hero-stats-frame {
+      position: absolute;
+      left: calc(57 * var(--u));
+      top: calc(693 * var(--u));
+      width: calc(341 * var(--u));
+      height: calc(208 * var(--u));
+      background-color: var(--stats-frame-bg);
+      border-radius: calc(14 * var(--u));
+      padding: calc(8 * var(--u));
+      display: flex;
+      gap: calc(8 * var(--u));
+      z-index: 10;
+    }
+
+    /* Dark Card inside Stats Frame */
+    .stat-dark-card {
+      flex: 1;
+      height: 100%;
+      background: #141414;
+      border-radius: calc(10 * var(--u));
+      padding: calc(12 * var(--u));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #ffffff;
+      min-width: 0;
+    }
+
+    .stat-dark-card .stat-number {
+      font-size: calc(26 * var(--u));
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-dark-card .stat-label {
+      font-size: calc(11 * var(--u));
+      color: #a0a0a0;
+      font-weight: 500;
+      margin-top: calc(3 * var(--u));
+    }
+
+    .partner-marks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: calc(6 * var(--u)) calc(4 * var(--u));
+      margin: calc(8 * var(--u)) 0;
+    }
+
+    .partner-mark {
+      display: flex;
+      align-items: center;
+      gap: calc(3 * var(--u));
+      font-size: calc(8.5 * var(--u));
+      color: #d0d0d0;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .partner-mark svg {
+      width: calc(10 * var(--u));
+      height: calc(10 * var(--u));
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    .btn-stat-bar {
+      height: calc(26 * var(--u));
+      background: #ffffff;
+      color: #111111;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(4 * var(--u));
+      font-size: calc(11 * var(--u));
+      font-weight: 600;
+      transition: background-color 0.2s ease, transform 0.2s;
+    }
+
+    .btn-stat-bar:hover {
+      background-color: #ededed;
+      transform: translateY(-1px);
+    }
+
+    /* Photo Card inside Stats Frame */
+    .stat-photo-card {
+      flex: 1;
+      height: 100%;
+      border-radius: calc(10 * var(--u));
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(10 * var(--u));
+      color: #ffffff;
+      min-width: 0;
+    }
+
+    .stat-photo-bg {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      z-index: 1 !important;
+      filter: brightness(0.68) contrast(1.15) !important;
+    }
+
+    .photo-card-top {
+      position: relative;
+      z-index: 2;
+      font-size: calc(10 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-bottom: calc(5 * var(--u));
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .photo-card-bottom {
+      position: relative;
+      z-index: 2;
+      text-align: right;
+      align-self: flex-end;
+    }
+
+    .photo-card-bottom .stat-number {
+      font-size: calc(24 * var(--u));
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    .photo-card-bottom .stat-sub {
+      font-size: calc(9.5 * var(--u));
+      line-height: 1.25;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      margin-top: calc(3 * var(--u));
+      max-width: calc(120 * var(--u));
+      margin-left: auto;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Right Column: Frosted "True Growth" pill at (1216, 258) */
+    .pill-true-growth {
+      position: absolute;
+      left: calc(1216 * var(--u));
+      top: calc(258 * var(--u));
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 9999px;
+      padding: calc(6 * var(--u)) calc(16 * var(--u)) calc(6 * var(--u)) calc(8 * var(--u));
+      display: inline-flex;
+      align-items: center;
+      gap: calc(8 * var(--u));
+      font-size: calc(13 * var(--u));
+      font-weight: 600;
+      color: var(--hero-ink);
+      box-shadow: 0 calc(4 * var(--u)) calc(16 * var(--u)) rgba(0, 0, 0, 0.05);
+      z-index: 10;
+    }
+
+    .check-disc {
+      width: calc(22 * var(--u));
+      height: calc(22 * var(--u));
+      border-radius: 50%;
+      background: var(--hero-ink);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .check-disc svg {
+      width: calc(11 * var(--u));
+      height: calc(11 * var(--u));
+      stroke: #ffffff;
+      stroke-width: 2.2;
+    }
+
+    /* "We're available / ● for you" at y 442 */
+    .hero-available-tag {
+      position: absolute;
+      left: calc(1200 * var(--u));
+      top: calc(442 * var(--u));
+      width: calc(181 * var(--u));
+      text-align: right;
+      font-size: calc(14.5 * var(--u));
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--hero-ink);
+      z-index: 10;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: calc(8 * var(--u));
+      height: calc(8 * var(--u));
+      border-radius: 50%;
+      background-color: var(--hero-ink);
+      margin-right: calc(4 * var(--u));
+      vertical-align: middle;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    /* Out Now / Q Industrial Card at y 520, 196u tall */
+    .card-q-industrial {
+      position: absolute;
+      left: calc(1171 * var(--u));
+      top: calc(520 * var(--u));
+      width: calc(210 * var(--u));
+      height: calc(196 * var(--u));
+      border-radius: calc(12 * var(--u));
+      overflow: hidden;
+      z-index: 10;
+      box-shadow: 0 calc(8 * var(--u)) calc(24 * var(--u)) rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+    }
+
+    .q-ind-img-wrap {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .q-ind-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: 62% 45%;
+      transform: scale(1.55);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-q-industrial:hover .q-ind-img {
+      transform: scale(1.7);
+    }
+
+    .q-ind-overlay {
+      position: absolute;
+      inset: 0;
+      padding: calc(14 * var(--u));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 100%);
+      color: #ffffff;
+      z-index: 2;
+    }
+
+    .q-ind-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .q-ind-badge {
+      font-size: calc(10 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .btn-frosted-arrow {
+      width: calc(34 * var(--u));
+      height: calc(34 * var(--u));
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hero-ink);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
+    }
+
+    .card-q-industrial:hover .btn-frosted-arrow {
+      transform: rotate(45deg);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .q-ind-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: calc(8 * var(--u));
+    }
+
+    .q-ind-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .q-ind-title {
+      font-family: 'Archivo', sans-serif;
+      font-variation-settings: 'wdth' 110, 'wght' 600;
+      font-size: calc(16 * var(--u));
+      letter-spacing: -0.01em;
+      color: #ffffff;
+    }
+
+    .q-ind-year {
+      font-size: calc(11 * var(--u));
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 1px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #ffffff;
+      border-radius: 1px;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Brand Plate at (532, 444), 364 × 73u */
+    .brand-plate {
+      position: absolute;
+      left: calc(532 * var(--u));
+      top: calc(444 * var(--u));
+      width: calc(364 * var(--u));
+      height: calc(73 * var(--u));
+      background: rgba(18, 18, 18, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: calc(14 * var(--u));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 calc(24 * var(--u));
+      z-index: 15;
+      box-shadow: 0 calc(12 * var(--u)) calc(32 * var(--u)) rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-mark-triangle {
+      width: calc(26 * var(--u));
+      height: calc(26 * var(--u));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-mark-triangle svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .brand-logo-text {
+      font-family: 'Archivo', sans-serif;
+      font-variation-settings: 'wdth' 125, 'wght' 700;
+      font-size: calc(25 * var(--u));
+      letter-spacing: 0.14em;
+      color: var(--off-white);
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .brand-menu-icon {
+      width: calc(24 * var(--u));
+      height: calc(12 * var(--u));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .brand-menu-icon span {
+      display: block;
+      width: 100%;
+      height: calc(2 * var(--u));
+      background-color: var(--off-white);
+      border-radius: 1px;
+    }
+
+    /* Fictional Wordmarks Row across jacket at y 864 */
+    .hero-logos-row {
+      position: absolute;
+      left: calc(480 * var(--u));
+      top: calc(864 * var(--u));
+      width: calc(480 * var(--u));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(20 * var(--u));
+      font-family: 'Inter Tight', sans-serif;
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.88);
+      z-index: 10;
+      user-select: none;
+    }
+
+    .hero-logos-row .dot-sep {
+      opacity: 0.4;
+      font-size: calc(10 * var(--u));
+    }
+
+    /* ==========================================================================
+       SECTION 2: BLACK BAR & MANIFESTO STATEMENT
+       ========================================================================== */
+    .bar-section {
+      width: 100%;
+      background-color: var(--night-black);
+      border-bottom: 1px solid var(--hairline-14);
+      height: calc(111 * var(--u));
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 20;
+    }
+
+    .bar-inner {
+      width: calc(1440 * var(--u));
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 calc(57 * var(--u));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .bar-item {
+      font-family: 'Archivo', sans-serif;
+      font-variation-settings: 'wdth' 125, 'wght' 600;
+      font-size: calc(14 * var(--u));
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white);
+    }
+
+    .bar-item.grey-text {
+      color: var(--statement-grey);
+    }
+
+    .bar-item .highlight-grey {
+      color: var(--statement-grey);
+    }
+
+    .bar-center {
+      display: flex;
+      align-items: center;
+      gap: calc(10 * var(--u));
+      cursor: pointer;
+    }
+
+    .round-arrow-disc {
+      width: calc(28 * var(--u));
+      height: calc(28 * var(--u));
+      border-radius: 50%;
+      background: #ffffff;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .bar-center:hover .round-arrow-disc {
+      transform: translateY(3px);
+    }
+
+    .round-arrow-disc svg {
+      width: calc(12 * var(--u));
+      height: calc(12 * var(--u));
+      stroke: #000000;
+      stroke-width: 2.2;
+    }
+
+    /* Statement Section */
+    .statement-section {
+      width: 100%;
+      background-color: var(--night-black);
+      padding-top: calc(170 * var(--u));
+      padding-bottom: calc(230 * var(--u));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .statement-container {
+      width: calc(830 * var(--u));
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .statement-text {
+      font-size: calc(52 * var(--u));
+      line-height: 1.33;
+      letter-spacing: -0.028em;
+      font-weight: 500;
+      color: var(--statement-grey);
+      margin: 0 auto;
+      user-select: none;
+    }
+
+    .statement-line {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .statement-text .word {
+      display: inline-block;
+      white-space: pre;
+      color: var(--statement-grey);
+      transition: color 0.15s ease-out;
+      will-change: color;
+    }
+
+    .statement-sub {
+      margin-top: calc(150 * var(--u));
+      font-size: calc(23 * var(--u));
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      font-weight: 500;
+      color: var(--off-white);
+      text-align: center;
+    }
+
+    .statement-sub .sub-grey {
+      color: var(--statement-grey);
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       SECTION 3: TRUST PANEL WITH STAT CARDS
+       ========================================================================== */
+    .trust-section {
+      width: 100%;
+      background-color: var(--night-black);
+      padding-bottom: calc(150 * var(--u));
+      position: relative;
+    }
+
+    .trust-panel {
+      width: calc(1302 * var(--u));
+      height: calc(429 * var(--u));
+      margin: 0 auto;
+      border: 1px solid var(--hairline-28);
+      border-radius: calc(14 * var(--u));
+      background: radial-gradient(circle at 10% 20%, rgba(30, 30, 30, 0.4) 0%, rgba(10, 10, 10, 0.8) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 calc(48 * var(--u));
+      box-sizing: border-box;
+    }
+
+    /* Left Heading & Details */
+    .trust-left {
+      width: calc(420 * var(--u));
+      flex-shrink: 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .trust-heading-wrapper {
+      position: relative;
+      margin-bottom: calc(20 * var(--u));
+    }
+
+    .trust-heading {
+      font-size: calc(55 * var(--u));
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: var(--off-white);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Frosted Glass Icon Tiles: 88u, 12u radius, backdrop blur */
+    .glass-tile {
+      width: calc(88 * var(--u));
+      height: calc(88 * var(--u));
+      border-radius: calc(12 * var(--u));
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 calc(8 * var(--u)) calc(20 * var(--u)) rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+    }
+
+    /* Tile 1: Asterisk overlapping top right of line 1 */
+    .tile-asterisk {
+      top: calc(-16 * var(--u));
+      left: calc(250 * var(--u));
+    }
+
+    .tile-asterisk svg {
+      width: calc(42 * var(--u));
+      height: calc(42 * var(--u));
+      fill: #ffffff;
+    }
+
+    /* Tile 2: Four-dot tile over "Businesses" */
+    .tile-dots {
+      bottom: calc(-12 * var(--u));
+      left: calc(140 * var(--u));
+    }
+
+    .dots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: calc(12 * var(--u));
+    }
+
+    .dots-grid span {
+      width: calc(8 * var(--u));
+      height: calc(8 * var(--u));
+      background-color: #ffffff;
+      border-radius: 50%;
+    }
+
+    .trust-desc {
+      font-size: calc(14.5 * var(--u));
+      line-height: 1.45;
+      color: rgba(244, 244, 244, 0.65);
+      font-weight: 400;
+      max-width: calc(380 * var(--u));
+    }
+
+    /* Right Cards Row */
+    .trust-cards-row {
+      display: flex;
+      gap: calc(16 * var(--u));
+      align-items: center;
+      margin-left: auto;
+      height: calc(326 * var(--u));
+      position: relative;
+      right: calc(-60 * var(--u)); /* Portrait card cut off by panel boundary */
+    }
+
+    .trust-card {
+      height: calc(326 * var(--u));
+      border-radius: calc(8 * var(--u));
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+      cursor: default;
+    }
+
+    .trust-card:hover {
+      transform: translateY(calc(-6 * var(--u)));
+      box-shadow: 0 calc(14 * var(--u)) calc(30 * var(--u)) rgba(0, 0, 0, 0.35);
+    }
+
+    /* 1. Avatar Card (293u), light grey #d6d6d6 */
+    .card-avatars {
+      width: calc(293 * var(--u));
+      background-color: var(--avatar-card-bg);
+      color: #111111;
+      padding: calc(24 * var(--u));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .avatars-grid-4x2 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: calc(10 * var(--u)) calc(8 * var(--u));
+    }
+
+    .avatar-item {
+      width: calc(48 * var(--u));
+      height: calc(48 * var(--u));
+      border-radius: 50%;
+      overflow: hidden;
+      background: #c0c0c0;
+      transform: scale(0.4);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .avatar-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatars-stat-bottom .stat-big {
+      font-size: calc(43 * var(--u));
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #111111;
+    }
+
+    .avatars-stat-bottom .stat-desc {
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      color: #3f3f3f;
+      margin-top: calc(4 * var(--u));
+    }
+
+    /* 2. Awards Card (298u), #262626 */
+    .card-awards {
+      width: calc(298 * var(--u));
+      background-color: var(--dark-card);
+      border: 1px solid var(--hairline-14);
+      color: var(--off-white);
+      padding: calc(24 * var(--u));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .awards-top .stat-big {
+      font-size: calc(43 * var(--u));
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+    }
+
+    .awards-top .stat-desc {
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: calc(4 * var(--u));
+    }
+
+    /* Laurel Badge "BEST GROWTH PARTNER 2026" */
+    .awards-badge-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(10 * var(--u)) 0;
+    }
+
+    .laurel-badge {
+      display: flex;
+      align-items: center;
+      gap: calc(10 * var(--u));
+      color: #e5e5e5;
+    }
+
+    .laurel-branch {
+      width: calc(26 * var(--u));
+      height: calc(52 * var(--u));
+    }
+
+    .laurel-center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .laurel-star {
+      width: calc(13 * var(--u));
+      height: calc(13 * var(--u));
+      fill: #ffffff;
+      margin-bottom: calc(3 * var(--u));
+    }
+
+    .laurel-center-text {
+      font-family: 'Archivo', sans-serif;
+      font-variation-settings: 'wdth' 120, 'wght' 700;
+      font-size: calc(10.5 * var(--u));
+      line-height: 1.25;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .awards-bottom-note {
+      font-size: calc(12.5 * var(--u));
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* 3. Portrait Card (200u, cut off by panel right edge) */
+    .card-portrait {
+      width: calc(200 * var(--u));
+      background-color: #1a1a1a;
+      border: 1px solid var(--hairline-14);
+    }
+
+    .card-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(1.05);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE PHONE LAYOUT (≤ 760px)
+       ========================================================================== */
+    @media (max-width: 760px) {
+      .hero-artboard {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: calc(20 * var(--u)) calc(18 * var(--u)) calc(40 * var(--u));
+      }
+
+      /* Phone Header: Nav left + Square Arrow Contact right */
+      .phone-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: calc(36 * var(--u));
+        order: 1;
+      }
+
+      .hero-nav {
+        position: static;
+        height: calc(42 * var(--u));
+        padding: calc(3 * var(--u));
+      }
+
+      .nav-link {
+        padding: 0 calc(12 * var(--u));
+        font-size: calc(13 * var(--u));
+      }
+
+      .hero-date {
+        display: none;
+      }
+
+      .btn-contact {
+        position: static;
+        width: calc(40 * var(--u));
+        height: calc(40 * var(--u));
+        border-radius: calc(10 * var(--u));
+        padding: 0;
+      }
+
+      .btn-contact span {
+        display: none;
+      }
+
+      /* Title & About come next */
+      .hero-title-group {
+        position: static;
+        margin-bottom: calc(20 * var(--u));
+        order: 2;
+      }
+
+      .title-line {
+        font-size: calc(64 * var(--u));
+      }
+
+      .hero-year-tag {
+        display: inline-block;
+        position: static;
+        margin-left: calc(8 * var(--u));
+        font-size: calc(14 * var(--u));
+        vertical-align: super;
+      }
+
+      .hero-about {
+        position: static;
+        max-width: 100%;
+        margin-bottom: calc(24 * var(--u));
+        order: 3;
+      }
+
+      .btn-book-call {
+        position: static;
+        align-self: flex-start;
+        margin-bottom: calc(36 * var(--u));
+        height: calc(46 * var(--u));
+        padding: 0 calc(24 * var(--u));
+        order: 4;
+      }
+
+      /* Full Width Photo (470u) with brand plate & logos over it */
+      .phone-photo-container {
+        position: relative;
+        width: 100%;
+        height: calc(470 * var(--u));
+        border-radius: calc(16 * var(--u));
+        overflow: hidden;
+        margin-bottom: calc(28 * var(--u));
+        order: 5;
+      }
+
+      .hero-photo-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+
+      .brand-plate {
+        position: absolute;
+        left: calc(20 * var(--u));
+        right: calc(20 * var(--u));
+        top: calc(200 * var(--u));
+        width: auto;
+        height: calc(64 * var(--u));
+        margin: 0 auto;
+      }
+
+      .brand-logo-text {
+        font-size: calc(20 * var(--u));
+      }
+
+      .hero-logos-row {
+        position: absolute;
+        left: 0;
+        bottom: calc(20 * var(--u));
+        top: auto;
+        width: 100%;
+      }
+
+      /* Then True Growth, the stats frame (two columns) and Out Now */
+      .pill-true-growth {
+        position: static;
+        margin-bottom: calc(16 * var(--u));
+        align-self: flex-start;
+        order: 6;
+      }
+
+      .hero-available-tag {
+        position: static;
+        width: 100%;
+        text-align: left;
+        margin-bottom: calc(20 * var(--u));
+        order: 7;
+      }
+
+      /* Stats frame: two columns on phone */
+      .hero-stats-frame {
+        position: static;
+        width: 100%;
+        height: calc(205 * var(--u));
+        flex-direction: row;
+        display: flex;
+        gap: calc(8 * var(--u));
+        margin-bottom: calc(24 * var(--u));
+        padding: calc(8 * var(--u));
+        order: 8;
+      }
+
+      .stat-dark-card, .stat-photo-card {
+        flex: 1;
+        height: 100%;
+        min-width: 0;
+      }
+
+      .card-q-industrial {
+        position: static;
+        width: 100%;
+        height: calc(220 * var(--u));
+        order: 9;
+      }
+
+      /* Bar on Mobile */
+      .bar-section {
+        height: auto;
+        padding: calc(24 * var(--u)) 0;
+      }
+
+      .bar-inner {
+        flex-direction: column;
+        gap: calc(14 * var(--u));
+        text-align: center;
+        padding: 0 calc(18 * var(--u));
+      }
+
+      /* Statement on Mobile: 28u */
+      .statement-section {
+        padding-top: calc(90 * var(--u));
+        padding-bottom: calc(100 * var(--u));
+      }
+
+      .statement-container {
+        width: 100%;
+        padding: 0 calc(18 * var(--u));
+      }
+
+      .statement-text {
+        font-size: calc(28 * var(--u));
+        line-height: 1.35;
+      }
+
+      .statement-line {
+        display: inline;
+        white-space: normal;
+      }
+
+      .statement-sub {
+        margin-top: calc(70 * var(--u));
+        font-size: calc(17 * var(--u));
+      }
+
+      /* Trust Panel on Mobile: stacks heading, paragraph, and cards; second glass tile hidden */
+      .trust-section {
+        padding-bottom: calc(80 * var(--u));
+      }
+
+      .trust-panel {
+        width: calc(100% - calc(36 * var(--u)));
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: calc(36 * var(--u)) calc(20 * var(--u));
+      }
+
+      .trust-left {
+        width: 100%;
+        margin-bottom: calc(36 * var(--u));
+      }
+
+      .trust-heading {
+        font-size: calc(38 * var(--u));
+      }
+
+      .tile-asterisk {
+        left: auto;
+        right: 0;
+        top: calc(-10 * var(--u));
+        width: calc(64 * var(--u));
+        height: calc(64 * var(--u));
+      }
+
+      .tile-dots {
+        display: none !important; /* Hidden on phone per specification */
+      }
+
+      .trust-cards-row {
+        position: static;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        gap: calc(18 * var(--u));
+        margin: 0;
+      }
+
+      .trust-card {
+        width: 100% !important;
+        height: auto;
+      }
+
+      .card-avatars, .card-awards {
+        padding: calc(24 * var(--u));
+      }
+
+      .card-portrait {
+        height: calc(240 * var(--u));
+      }
+    }
+
+    /* ==========================================================================
+       REDUCED MOTION PREFERENCES
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .statement-text .word {
+        color: var(--off-white) !important;
+      }
+      .avatar-item {
+        transform: scale(1) !important;
+        opacity: 1 !important;
+      }
+      .progress-bar-fill {
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HERO SECTION (1440 × 938u)
+       ========================================================================== -->
+  <header class="hero-section" id="hero">
+    <div class="hero-artboard">
+
+      <!-- Header Row (Nav + Contact Us) -->
+      <div class="phone-header-row">
+        <!-- Segmented Nav Pill at (57, 61) -->
+        <nav class="hero-nav" id="heroNav" aria-label="Main Navigation">
+          <div class="nav-slider" id="navSlider"></div>
+          <a href="#hero" class="nav-link is-active" data-index="0">Home</a>
+          <a href="#studio" class="nav-link" data-index="1">Studio</a>
+          <a href="#statement" class="nav-link" data-index="2">Works</a>
+          <a href="#trust" class="nav-link" data-index="3">Blog</a>
+        </nav>
+
+        <!-- Contact Us CTA at (1237, 63) -->
+        <a href="#contact" class="btn-contact" id="btnContact">
+          <span>Contact Us</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Date at (1038, 70) -->
+      <div class="hero-date" id="heroDate">Sunday / 17.06 – 27 June 2026</div>
+
+      <!-- Main Display Title: "PURE / DESIGN" at (57, 246) -->
+      <div class="hero-title-group" id="heroTitleGroup">
+        <h1 style="display: contents;">
+          <span class="title-line-mask">
+            <span class="title-line title-line-1">PURE</span>
+          </span>
+          <span class="title-line-mask">
+            <span class="title-line title-line-2">DESIGN</span>
+          </span>
+        </h1>
+      </div>
+
+      <!-- Year Tag at (339, 272) -->
+      <span class="hero-year-tag" id="heroYearTag">(’25)</span>
+
+      <!-- (ABOUT) copy at y 458 -->
+      <div class="hero-about" id="heroAbout">
+        <div class="about-label">(ABOUT)</div>
+        <p class="about-copy">Building stunning website that every brand deserves to be seen.</p>
+      </div>
+
+      <!-- Book A Call Button at y 584 -->
+      <a href="#book" class="btn-book-call" id="btnBookCall">
+        <span>Book A Call</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <!-- Desktop Photo & Mobile Container Wrapper -->
+      <div class="phone-photo-container">
+        <!-- Hero Photo: placed at left 338u, top -86u, 764 × 1024u -->
+        <div class="hero-photo-wrapper" id="heroPhotoWrapper">
+          <img 
+            src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/7dc8b8f3-4ccb-4599-8ce4-7f7c7881bad9.webp" 
+            alt="Orvante Creative Director seen from behind in dark technical jacket" 
+            class="hero-photo"
+            id="heroPhoto"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+
+        <!-- Brand Plate at (532, 444), 364 × 73u -->
+        <div class="brand-plate" id="brandPlate">
+          <div class="brand-mark-triangle">
+            <!-- Sleek two-part triangular mark -->
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="14,3 26,24 2,24" stroke="#ffffff" stroke-width="1.8" fill="none" opacity="0.4"/>
+              <polygon points="14,10 22,24 6,24" fill="#ffffff"/>
+            </svg>
+          </div>
+          <span class="brand-logo-text">ORVANTE</span>
+          <div class="brand-menu-icon" aria-label="Menu Toggle" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <!-- Fictional Wordmarks Row across jacket at y 864 -->
+        <div class="hero-logos-row" id="heroLogosRow">
+          <span>Lumon</span>
+          <span class="dot-sep">·</span>
+          <span>Paperfold</span>
+          <span class="dot-sep">·</span>
+          <span>Northwind</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Frosted "True Growth" pill at (1216, 258) -->
+      <div class="pill-true-growth" id="pillTrueGrowth">
+        <div class="check-disc">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="2.5 6 4.8 8.5 9.5 3.5"/>
+          </svg>
+        </div>
+        <span>True Growth</span>
+      </div>
+
+      <!-- "We're available / ● for you" at y 442 -->
+      <div class="hero-available-tag" id="heroAvailableTag">
+        We’re available<br>
+        <span class="status-dot"></span>for you
+      </div>
+
+      <!-- Out Now / Q Industrial Card at y 520 -->
+      <div class="card-q-industrial" id="cardQIndustrial">
+        <div class="q-ind-img-wrap">
+          <img 
+            src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/9340eb08-877d-4d08-91fb-b70754541d98.webp" 
+            alt="Q Industrial campaign visual" 
+            class="q-ind-img" 
+            loading="lazy"
+          />
+        </div>
+        <div class="q-ind-overlay">
+          <div class="q-ind-top">
+            <span class="q-ind-badge">Out Now</span>
+            <div class="btn-frosted-arrow">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="q-ind-bottom">
+            <div class="q-ind-title-row">
+              <span class="q-ind-title">Q Industrial</span>
+              <span class="q-ind-year">[2025]</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="qIndProgress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Frame at (57, 693), 341 × 208u -->
+      <div class="hero-stats-frame" id="heroStatsFrame">
+        <!-- Dark Card -->
+        <div class="stat-dark-card">
+          <div>
+            <div class="stat-number stat-counter" data-target="400" data-suffix="+">400+</div>
+            <div class="stat-label">Trusted Partner</div>
+          </div>
+
+          <!-- Six tiny fictional partner marks -->
+          <div class="partner-marks-grid">
+            <div class="partner-mark">
+              <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="6" y1="1" x2="6" y2="11" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Halcyon</span>
+            </div>
+            <div class="partner-mark">
+              <svg viewBox="0 0 12 12"><ellipse cx="6" cy="6" rx="4.5" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5"/></svg>
+              <span>Ostra</span>
+            </div>
+            <div class="partner-mark">
+              <svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="2" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Fenwick</span>
+            </div>
+            <div class="partner-mark">
+              <svg viewBox="0 0 12 12"><circle cx="4" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Monolo</span>
+            </div>
+            <div class="partner-mark">
+              <svg viewBox="0 0 12 12"><polygon points="6,1 11,6 6,11 1,6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Kitefly</span>
+            </div>
+            <div class="partner-mark">
+              <svg viewBox="0 0 12 12"><path d="M6 11V2M6 2L2 6M6 2L10 6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Arbor</span>
+            </div>
+          </div>
+
+          <!-- White Book a call bar -->
+          <a href="#book" class="btn-stat-bar">
+            <span>Book a call</span>
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Photo Card (cap photo) -->
+        <div class="stat-photo-card">
+          <img 
+            src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/a9d3641f-d629-46e5-8d2d-5f75386b803d.webp" 
+            alt="Studio feed visual" 
+            class="stat-photo-bg" 
+            loading="lazy"
+          />
+          <div class="photo-card-top">Studio Feed · 05/06</div>
+          <div class="photo-card-bottom">
+            <div class="stat-number stat-counter" data-target="230" data-suffix="+">230+</div>
+            <div class="stat-sub">Projects successfully launched worldwide</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SECTION 2: BLACK BAR & MANIFESTO STATEMENT
+       ========================================================================== -->
+  <div class="bar-section" id="studio">
+    <div class="bar-inner">
+      <div class="bar-item">EST <span class="highlight-grey">2019</span></div>
+      <a href="#statement" class="bar-center" style="text-decoration: none;">
+        <span class="bar-item">SCROLL DOWN</span>
+        <div class="round-arrow-disc">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2V10M6 10L2.5 6.5M6 10L9.5 6.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+      <div class="bar-item grey-text">LIVE IN DETAILS</div>
+    </div>
+  </div>
+
+  <section class="statement-section" id="statement">
+    <div class="statement-container">
+      <p class="statement-text" id="statementText">
+        <!-- Spanned words dynamically injected -->
+      </p>
+
+      <p class="statement-sub">
+        Performance-driven marketing, from<br>
+        strategy to execution. <span class="sub-grey">Built for growing brands.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: TRUST PANEL
+       ========================================================================== -->
+  <section class="trust-section" id="trust">
+    <div class="trust-panel" id="trustPanel">
+      
+      <!-- Left Column with Overlapping Glass Tiles -->
+      <div class="trust-left">
+        <div class="trust-heading-wrapper">
+          <h2 class="trust-heading">
+            Trusted by<br>
+            Hundreds of<br>
+            Growing<br>
+            Businesses
+          </h2>
+
+          <!-- Frosted Glass Tile 1: Asterisk Tile (top right of line 1) -->
+          <div class="glass-tile tile-asterisk" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2V22M2 12H22M4.93 4.93L19.07 19.07M4.93 19.07L19.07 4.93" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Frosted Glass Tile 2: Four-Dot Tile (over "Businesses") -->
+          <div class="glass-tile tile-dots" aria-hidden="true">
+            <div class="dots-grid">
+              <span></span><span></span>
+              <span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="trust-desc">
+          Every campaign is powered by creativity, data, and execution helping brands achieve measurable success across every channel.
+        </p>
+      </div>
+
+      <!-- Right Column Cards Row -->
+      <div class="trust-cards-row">
+        
+        <!-- Card 1: Avatar Card (293u) -->
+        <div class="trust-card card-avatars" id="cardAvatars">
+          <div class="avatars-grid-4x2" id="avatarsGrid">
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/300f41b1-3de5-4153-afde-06e15e753ad0.webp" alt="Partner avatar 1" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/bfff4cdf-4fda-4491-ada6-62f3b6236492.webp" alt="Partner avatar 2" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/943b121e-fe72-479f-93ae-aa8cd1650f69.webp" alt="Partner avatar 3" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/c673306f-2b81-4c3d-a7d2-3df61d481abb.webp" alt="Partner avatar 4" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/2e4fcf11-d0fc-4f31-8f7a-dfe751777141.webp" alt="Partner avatar 5" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/ab458fcd-4c2c-426f-8213-21cc3c7274be.webp" alt="Partner avatar 6" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/c1fcd833-5ac9-41e9-9352-fead7e64fa24.webp" alt="Partner avatar 7" loading="lazy"></div>
+            <div class="avatar-item"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/4c2b3307-e555-4633-949c-efd3b7e09d82.webp" alt="Partner avatar 8" loading="lazy"></div>
+          </div>
+
+          <div class="avatars-stat-bottom" style="display: flex; align-items: flex-end; justify-content: space-between;">
+            <div class="stat-big stat-counter" data-target="56" data-suffix="M+">0M+</div>
+            <div class="stat-desc" style="text-align: right; line-height: 1.25; margin-bottom: calc(4 * var(--u));">Global<br>Collaborations</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Awards Card (298u) -->
+        <div class="trust-card card-awards" id="cardAwards">
+          <div class="awards-top">
+            <div class="stat-big stat-counter" data-target="10" data-suffix="+">0+</div>
+            <div class="stat-desc">Industry Awards</div>
+          </div>
+
+          <!-- SVG Laurel Badge "BEST GROWTH PARTNER 2026" -->
+          <div class="awards-badge-wrap">
+            <div class="laurel-badge">
+              <!-- Left Laurel Branch -->
+              <svg class="laurel-branch" viewBox="0 0 30 60" fill="none" stroke="currentColor" stroke-linecap="round">
+                <path d="M22 6C17 12 10 18 12 25C14 23 19 19 23 15" stroke-width="2"/>
+                <path d="M19 19C13 26 7 32 10 40C12 37 18 33 21 28" stroke-width="2"/>
+                <path d="M16 33C11 40 6 46 10 54C12 51 16 46 18 42" stroke-width="2"/>
+                <path d="M25 4C23 16 20 32 12 56" stroke-width="1.8" opacity="0.65"/>
+              </svg>
+              
+              <div class="laurel-center">
+                <svg class="laurel-star" viewBox="0 0 24 24">
+                  <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+                </svg>
+                <div class="laurel-center-text">
+                  BEST GROWTH<br>
+                  PARTNER<br>
+                  2026
+                </div>
+              </div>
+
+              <!-- Right Laurel Branch (Mirrored) -->
+              <svg class="laurel-branch" viewBox="0 0 30 60" fill="none" stroke="currentColor" stroke-linecap="round" style="transform: scaleX(-1);">
+                <path d="M22 6C17 12 10 18 12 25C14 23 19 19 23 15" stroke-width="2"/>
+                <path d="M19 19C13 26 7 32 10 40C12 37 18 33 21 28" stroke-width="2"/>
+                <path d="M16 33C11 40 6 46 10 54C12 51 16 46 18 42" stroke-width="2"/>
+                <path d="M25 4C23 16 20 32 12 56" stroke-width="1.8" opacity="0.65"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="awards-bottom-note">
+            Helping businesses grow through creative strategy and proven performance.
+          </div>
+        </div>
+
+        <!-- Card 3: Portrait Card (200u, cut off by panel right edge) -->
+        <div class="trust-card card-portrait" id="cardPortrait">
+          <img 
+            src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/addecc7d-666f-4342-8290-ed7f7cbbffd6.webp" 
+            alt="Creative collaborator portrait" 
+            loading="lazy"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT: MOTION, SCROLL & RECORDER CONTROLLER
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Check mode flags
+      const urlParams = new URLSearchParams(window.location.search);
+      const isRecorder = urlParams.get('rec') === '1';
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Dynamic scale unit calculator
+      function updateScaleUnit() {
+        const w = window.innerWidth;
+        const u = w <= 760 ? (w / 390) : Math.min(w / 1440, 1.333333);
+        document.documentElement.style.setProperty('--u', u + 'px');
+      }
+      updateScaleUnit();
+
+      // ==========================================================================
+      // 1. NAV SLIDING PILL
+      // ==========================================================================
+      const nav = document.getElementById('heroNav');
+      const slider = document.getElementById('navSlider');
+      const navLinks = Array.from(nav.querySelectorAll('.nav-link'));
+      let activeLink = nav.querySelector('.nav-link.is-active') || navLinks[0];
+
+      function positionSliderTo(link) {
+        if (!link || !slider) return;
+        const linkRect = link.getBoundingClientRect();
+        const navRect = nav.getBoundingClientRect();
+        const left = linkRect.left - navRect.left;
+        const width = linkRect.width;
+
+        slider.style.transform = `translateX(${left}px)`;
+        slider.style.width = `${width}px`;
+
+        navLinks.forEach(l => l.classList.remove('is-hovered'));
+        link.classList.add('is-hovered');
+      }
+
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => positionSliderTo(link));
+        link.addEventListener('click', () => {
+          navLinks.forEach(l => l.classList.remove('is-active'));
+          link.classList.add('is-active');
+          activeLink = link;
+        });
+      });
+
+      nav.addEventListener('mouseleave', () => {
+        positionSliderTo(activeLink);
+        activeLink.classList.remove('is-hovered');
+      });
+
+      window.addEventListener('resize', () => {
+        updateScaleUnit();
+        positionSliderTo(activeLink);
+      }, { passive: true });
+
+      requestAnimationFrame(() => positionSliderTo(activeLink));
+
+      // ==========================================================================
+      // 2. STATEMENT TEXT: EXACT FIVE LINES & WORD-BY-WORD FILL
+      // ==========================================================================
+      const statementEl = document.getElementById('statementText');
+      const lines = [
+        "We believe the strongest brands are",
+        "built through strategy, not just",
+        "aesthetics. Every campaign is designed",
+        "to capture attention, inspire action, and",
+        "create lasting business growth."
+      ];
+
+      statementEl.innerHTML = lines.map(lineStr => {
+        const lineWords = lineStr.split(' ').map(w => `<span class="word">${w}</span>`).join(' ');
+        return `<span class="statement-line">${lineWords}</span>`;
+      }).join('');
+
+      const wordSpans = Array.from(statementEl.querySelectorAll('.word'));
+
+      const greyR = 111, greyG = 111, greyB = 111;
+      const whiteR = 244, whiteG = 244, whiteB = 244;
+
+      function updateStatementFill(progress) {
+        if (prefersReducedMotion) {
+          wordSpans.forEach(span => span.style.color = 'var(--off-white)');
+          return;
+        }
+
+        // Virtual fill head with a 3-word soft edge
+        const N = wordSpans.length;
+        const activeHead = progress * (N + 3) - 1.5;
+
+        wordSpans.forEach((span, index) => {
+          let t = (activeHead - index + 1.5) / 3;
+          t = Math.max(0, Math.min(1, t)); // clamp 0 to 1
+
+          const r = Math.round(greyR + (whiteR - greyR) * t);
+          const g = Math.round(greyG + (whiteG - greyG) * t);
+          const b = Math.round(greyB + (whiteB - greyB) * t);
+
+          span.style.color = `rgb(${r}, ${g}, ${b})`;
+        });
+      }
+
+      // ==========================================================================
+      // 3. NUMBER COUNTER HELPER
+      // ==========================================================================
+      function animateCounter(el, duration = 1400) {
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        const suffix = el.getAttribute('data-suffix') || '';
+        if (isNaN(target)) return;
+
+        if (prefersReducedMotion) {
+          el.textContent = target + suffix;
+          return;
+        }
+
+        const start = 0;
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const p = Math.min(elapsed / duration, 1);
+          // Ease-out cubic
+          const eased = 1 - Math.pow(1 - p, 3);
+          const current = Math.round(start + (target - start) * eased);
+          el.textContent = current + suffix;
+
+          if (p < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target + suffix;
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      // ==========================================================================
+      // 4. LOAD ANIMATION SEQUENCE (WEB ANIMATIONS)
+      // ==========================================================================
+      const heroPhotoWrapper = document.getElementById('heroPhotoWrapper');
+      const titleLine1 = document.querySelector('.title-line-1');
+      const titleLine2 = document.querySelector('.title-line-2');
+      const qIndProgress = document.getElementById('qIndProgress');
+
+      if (!prefersReducedMotion) {
+        // Initial element hide for load animation
+        if (titleLine1 && titleLine2) {
+          titleLine1.style.transform = 'translateY(105%)';
+          titleLine2.style.transform = 'translateY(105%)';
+        }
+        if (heroPhotoWrapper) {
+          heroPhotoWrapper.style.transform = 'translateY(40px)';
+          heroPhotoWrapper.style.filter = 'blur(10px)';
+          heroPhotoWrapper.style.opacity = '0';
+        }
+        if (nav) {
+          nav.style.transform = 'translateY(-20px)';
+          nav.style.opacity = '0';
+        }
+
+        // Secondary items to stagger
+        const heroStaggerItems = [
+          document.getElementById('heroDate'),
+          document.getElementById('btnContact'),
+          document.getElementById('heroYearTag'),
+          document.getElementById('heroAbout'),
+          document.getElementById('btnBookCall'),
+          document.getElementById('pillTrueGrowth'),
+          document.getElementById('heroAvailableTag'),
+          document.getElementById('cardQIndustrial'),
+          document.getElementById('brandPlate'),
+          document.getElementById('heroStatsFrame'),
+          document.getElementById('heroLogosRow')
+        ].filter(Boolean);
+
+        heroStaggerItems.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = (window.innerWidth <= 760 && el.id === 'brandPlate') 
+            ? 'none' 
+            : 'translateY(14px)';
+          el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        });
+
+        window.addEventListener('load', () => {
+          // 1. Title lines rise out of their masks (1s, staggered 110ms)
+          if (titleLine1 && titleLine2) {
+            titleLine1.animate([
+              { transform: 'translateY(105%)' },
+              { transform: 'translateY(0%)' }
+            ], {
+              duration: 1000,
+              easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+              fill: 'forwards'
+            });
+
+            setTimeout(() => {
+              titleLine2.animate([
+                { transform: 'translateY(105%)' },
+                { transform: 'translateY(0%)' }
+              ], {
+                duration: 1000,
+                easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                fill: 'forwards'
+              });
+            }, 110);
+          }
+
+          // 2. Photo rises 40px, un-blurs and fades in over 1.3s
+          if (heroPhotoWrapper) {
+            heroPhotoWrapper.animate([
+              { transform: 'translateY(40px)', filter: 'blur(10px)', opacity: 0 },
+              { transform: 'translateY(0px)', filter: 'blur(0px)', opacity: 1 }
+            ], {
+              duration: 1300,
+              easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+              fill: 'forwards'
+            });
+          }
+
+          // 3. Nav drops in
+          if (nav) {
+            nav.animate([
+              { transform: 'translateY(-20px)', opacity: 0 },
+              { transform: 'translateY(0px)', opacity: 1 }
+            ], {
+              duration: 800,
+              easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+              fill: 'forwards'
+            });
+          }
+
+          // 4. Staggered hero items rise 14px and fade in (55ms interval)
+          heroStaggerItems.forEach((el, idx) => {
+            setTimeout(() => {
+              el.style.transform = 'translateY(0)';
+              el.style.opacity = '1';
+            }, 250 + idx * 55);
+          });
+
+          // 5. Q Industrial progress line draws in
+          setTimeout(() => {
+            if (qIndProgress) qIndProgress.style.width = '100%';
+          }, 450);
+
+          // 6. Hero counters count up over 1.4s
+          const heroCounters = document.querySelectorAll('#heroStatsFrame .stat-counter');
+          heroCounters.forEach(c => animateCounter(c, 1400));
+        });
+      } else {
+        if (qIndProgress) qIndProgress.style.width = '100%';
+        document.querySelectorAll('.stat-counter').forEach(c => {
+          c.textContent = c.getAttribute('data-target') + (c.getAttribute('data-suffix') || '');
+        });
+      }
+
+      // ==========================================================================
+      // 5. SCROLL INTERACTIONS (PARALLAX, STATEMENT FILL, TRUST PANEL ENTRANCE)
+      // ==========================================================================
+      let hasTriggeredTrust = false;
+      const trustPanel = document.getElementById('trustPanel');
+      const avatars = Array.from(document.querySelectorAll('#avatarsGrid .avatar-item'));
+
+      function triggerTrustEntrance() {
+        if (hasTriggeredTrust) return;
+        hasTriggeredTrust = true;
+
+        // Animate 56M+ and 10+
+        const trustCounters = trustPanel.querySelectorAll('.stat-counter');
+        trustCounters.forEach(c => animateCounter(c, 1400));
+
+        // Pop in avatars staggered (scale 0.4 -> 1)
+        avatars.forEach((avatar, index) => {
+          if (prefersReducedMotion) {
+            avatar.style.transform = 'scale(1)';
+            avatar.style.opacity = '1';
+            return;
+          }
+
+          setTimeout(() => {
+            avatar.animate([
+              { transform: 'scale(0.4)', opacity: 0 },
+              { transform: 'scale(1)', opacity: 1 }
+            ], {
+              duration: 600,
+              easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+              fill: 'forwards'
+            });
+          }, index * 60);
+        });
+      }
+
+      if (!isRecorder) {
+        const statementSection = document.getElementById('statement');
+
+        function onScroll() {
+          const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+          // Parallax: Hero photo drifts at 0.12× scroll
+          if (heroPhotoWrapper && !prefersReducedMotion && window.innerWidth > 760) {
+            heroPhotoWrapper.style.transform = `translateY(${scrollY * 0.12}px)`;
+          }
+
+          // Statement Fill
+          if (statementSection) {
+            const rect = statementSection.getBoundingClientRect();
+            const viewHeight = window.innerHeight;
+
+            const startY = viewHeight * 0.75;
+            const endY = viewHeight * 0.25;
+            const totalDist = (rect.height + (startY - endY));
+            const currentDist = startY - rect.top;
+
+            const progress = Math.max(0, Math.min(1, currentDist / totalDist));
+            updateStatementFill(progress);
+          }
+
+          // Trust Panel Entrance check
+          if (trustPanel && !hasTriggeredTrust) {
+            const tRect = trustPanel.getBoundingClientRect();
+            if (tRect.top < window.innerHeight * 0.85) {
+              triggerTrustEntrance();
+            }
+          }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll(); // Run once initially
+      }
+
+      // ==========================================================================
+      // 6. RECORDER MODE (?rec=1)
+      // When rec=1, runs timed progression for video capture
+      // ==========================================================================
+      if (isRecorder && !prefersReducedMotion) {
+        console.info('Orvante: Recorder mode (?rec=1) active.');
+
+        const recStartTime = performance.now();
+
+        function recorderLoop(now) {
+          const elapsedSec = (now - recStartTime) / 1000;
+
+          // 1. Photo drifts slowly throughout
+          if (heroPhotoWrapper) {
+            heroPhotoWrapper.style.transform = `translateY(${elapsedSec * 10}px)`;
+          }
+
+          // 2. Statement fill: 1.3s to 4.2s (duration 2.9s)
+          if (elapsedSec >= 1.3 && elapsedSec <= 4.2) {
+            const p = (elapsedSec - 1.3) / (4.2 - 1.3);
+            updateStatementFill(p);
+          } else if (elapsedSec > 4.2) {
+            updateStatementFill(1.0);
+          }
+
+          // 3. Trust counters and avatars: 3.5s to 5.2s
+          if (elapsedSec >= 3.5 && !hasTriggeredTrust) {
+            triggerTrustEntrance();
+          }
+
+          // 4. Awards card lift: 5.3s
+          if (elapsedSec >= 5.3) {
+            const awardsCard = document.getElementById('cardAwards');
+            if (awardsCard && !awardsCard.dataset.lifted) {
+              awardsCard.dataset.lifted = 'true';
+              const uVal = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--u')) || 1;
+              awardsCard.style.transform = `translateY(${-6 * uVal}px)`;
+            }
+          }
+
+          requestAnimationFrame(recorderLoop);
+        }
+
+        requestAnimationFrame(recorderLoop);
+      }
+
+    })();
+  </script>
+</body>
+</html>
